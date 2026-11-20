@@ -1,0 +1,2 @@
+model,test_loss,test_accuracy,epsilon,delta,noise_multiplier,max_grad_norm
+Differential Privacy,0.5691,0.8308,0.6048,1e-05,1.0,1.0

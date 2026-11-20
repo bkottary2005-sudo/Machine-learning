@@ -1,0 +1,4 @@
+Method,Loss
+Centralized,0.6288
+FedAvg,0.6774
+FedProx,0.6896289356

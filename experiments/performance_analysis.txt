@@ -1,0 +1,55 @@
+FinGraph-Intelligence
+Performance Evaluation: Pandas vs PySpark
+
+Dataset:
+AMLSim transaction dataset with 118,250 transactions.
+
+Evaluation Metrics:
+- Total records processed
+- Missing values
+- Invalid transaction amounts
+- Self-transactions
+- Processing time
+
+Results:
+
+Pandas:
+- Dataset rows: 118,250
+- Missing values: 0
+- Invalid amounts: 0
+- Self-transactions: 14
+- Processing time: 0.066868 seconds
+
+PySpark:
+- Dataset rows: 118,250
+- Missing values: 0
+- Invalid amounts: 0
+- Self-transactions: 14
+- Processing time: 12.930795 seconds
+
+Analysis:
+
+Both frameworks successfully processed the dataset and produced
+consistent data-quality results.
+
+Pandas demonstrated significantly lower processing time for the
+current dataset because it is relatively small and can be processed
+efficiently in memory.
+
+PySpark introduced additional execution overhead associated with
+Spark session initialization, JVM execution, and distributed
+processing infrastructure.
+
+Although Pandas performed better for this dataset, PySpark is
+included in the project to support scalable processing of larger
+datasets and distributed data-processing workloads.
+
+Conclusion:
+
+For the current AMLSim dataset of 118,250 transactions, Pandas
+was faster than PySpark. PySpark provides a scalable processing
+framework that can be useful when dataset size and computational
+requirements increase.
+
+The experiment demonstrates the trade-off between processing
+overhead and scalability in data-processing frameworks.
