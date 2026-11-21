@@ -1,0 +1,3 @@
+Model,Accuracy,Precision,Recall,F1_Score
+Centralized ML,0.8559,0.7158,0.2461,0.3663
+GraphSAGE,0.9132,0.3233,0.7483,0.4515

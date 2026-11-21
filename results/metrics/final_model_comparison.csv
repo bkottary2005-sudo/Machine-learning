@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1_Score,ROC_AUC
+Centralized ML,0.8559,0.7158,0.2461,0.3663,
+GraphSAGE,0.9132,0.3233,0.7483,0.4515,0.9036
+Federated GraphSAGE,0.7534,0.1294,0.7273,0.2196,0.8237

@@ -1,0 +1,2 @@
+Model,Accuracy,Precision,Recall,F1_Score,ROC_AUC,True_Negatives,False_Positives,False_Negatives,True_Positives
+Federated GraphSAGE,0.750417083750417,0.12700369913686807,0.7202797202797203,0.21593291404612158,0.8224967044168165,2146,708,40,103
