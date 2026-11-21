@@ -1,0 +1,2 @@
+attack,attack_accuracy,attack_precision,attack_recall,attack_auc
+Confidence-Based Membership Inference,0.2,0.0,0.0,0.4984
