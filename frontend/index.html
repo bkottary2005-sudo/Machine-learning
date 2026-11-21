@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinGraph Intelligence</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #0b1120;
+            color: #e5e7eb;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px;
+        }
+
+        header {
+            margin-bottom: 35px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #38bdf8;
+        }
+
+        header p {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: #111c30;
+            border: 1px solid #26354d;
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        input {
+            background: #0b1120;
+            border: 1px solid #334155;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #0284c7;
+            border: none;
+            border-radius: 9px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0369a1;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .result {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .probability {
+            font-size: 52px;
+            font-weight: bold;
+            color: #38bdf8;
+            margin: 20px 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .legitimate {
+            background: #064e3b;
+            color: #34d399;
+        }
+
+        .fraud {
+            background: #7f1d1d;
+            color: #fca5a5;
+        }
+
+        .risk {
+            margin-top: 20px;
+            color: #94a3b8;
+        }
+
+        .placeholder {
+            color: #64748b;
+            margin-top: 30px;
+        }
+
+        .error {
+            color: #f87171;
+            margin-top: 15px;
+            word-break: break-word;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>FinGraph Intelligence</h1>
+        <p>AI-powered financial transaction fraud detection</p>
+    </header>
+
+    <div class="grid">
+
+        <!-- Transaction Input -->
+        <div class="card">
+            <h2>Transaction Analysis</h2>
+
+            <form id="fraudForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Transaction Value</label>
+                        <input type="number" id="value" value="5000" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Time</label>
+                        <input type="number" id="time" value="10" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Amount Log</label>
+                        <input type="number" step="any" id="amount_log" value="8.517" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Amount Deviation</label>
+                        <input type="number" step="any" id="amount_deviation" value="2.5" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Time Step</label>
+                        <input type="number" id="time_step" value="10" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Sender Transaction Count</label>
+                        <input type="number" id="sender_transaction_count" value="15" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Receiver Transaction Count</label>
+                        <input type="number" id="receiver_transaction_count" value="8" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Sender Total Amount</label>
+                        <input type="number" id="sender_total_amount" value="25000" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Receiver Total Amount</label>
+                        <input type="number" id="receiver_total_amount" value="12000" required>
+                    </div>
+
+                </div>
+
+                <button type="submit" id="analyzeBtn">
+                    Analyze Transaction
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Results -->
+        <div class="card">
+            <h2>Analysis Result</h2>
+
+            <div class="result" id="result">
+
+                <div class="placeholder">
+                    Enter transaction details and click Analyze Transaction.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        FinGraph Intelligence | ML-Based Fraud Detection
+    </div>
+
+</div>
+
+<script>
+
+const form = document.getElementById("fraudForm");
+const resultDiv = document.getElementById("result");
+const analyzeBtn = document.getElementById("analyzeBtn");
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = "Analyzing...";
+
+    resultDiv.innerHTML = `
+        <div class="placeholder">
+            Analyzing transaction...
+        </div>
+    `;
+
+    const transaction = {
+        value: Number(document.getElementById("value").value),
+        time: Number(document.getElementById("time").value),
+        amount_log: Number(document.getElementById("amount_log").value),
+        amount_deviation: Number(document.getElementById("amount_deviation").value),
+        time_step: Number(document.getElementById("time_step").value),
+        sender_transaction_count: Number(document.getElementById("sender_transaction_count").value),
+        receiver_transaction_count: Number(document.getElementById("receiver_transaction_count").value),
+        sender_total_amount: Number(document.getElementById("sender_total_amount").value),
+        receiver_total_amount: Number(document.getElementById("receiver_total_amount").value)
+    };
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(transaction)
+        });
+
+        if (!response.ok) {
+            throw new Error("API request failed with status " + response.status);
+        }
+
+        const data = await response.json();
+
+        const probability = data.fraud_probability * 100;
+
+        const statusClass = data.prediction === 1
+            ? "fraud"
+            : "legitimate";
+
+        resultDiv.innerHTML = `
+            <h3>Fraud Probability</h3>
+
+            <div class="probability">
+                ${probability.toFixed(2)}%
+            </div>
+
+            <div class="status ${statusClass}">
+                ${data.classification}
+            </div>
+
+            <div class="risk">
+                Risk Level: <strong>${data.risk_level}</strong>
+            </div>
+
+            <p class="risk">
+                Threshold: ${data.threshold}
+            </p>
+        `;
+
+    } catch (error) {
+
+        resultDiv.innerHTML = `
+            <div class="error">
+                Error connecting to API.
+                <br><br>
+                ${error.message}
+                <br><br>
+                Make sure your FastAPI server is running.
+            </div>
+        `;
+
+    }
+
+    analyzeBtn.disabled = false;
+    analyzeBtn.textContent = "Analyze Transaction";
+
+});
+
+</script>
+
+</body>
+</html>
